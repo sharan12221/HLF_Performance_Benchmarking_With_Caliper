@@ -1,0 +1,52 @@
+name: Caliper Benchmarks
+version: "2.0.0"
+
+caliper:
+  blockchain: fabric
+
+channels:
+  # channelName of mychannel matches the name of the channel created by test network
+  - channelName: mychannel
+    # the chaincodeIDs of all the fabric chaincodes in caliper-benchmarks
+    contracts:
+    - id: fabcar
+    # - id: simple
+    - id: healthcarecontract
+
+organizations:
+  - mspid: Org1MSP
+    # Identities come from cryptogen created material for test-network
+    identities:
+      certificates:
+      - name: 'User1'
+        clientPrivateKey:
+          # path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/a3b491b54c7fae86fa1745345f2cc62d3e589ddff997a212aa226ecb4c00f8a7_sk'
+          path: './networks/fabric/certs/6a5c20b3861c1bb712832f397289addeb77e72cc820a2fe51d574088bec1deb7_sk'
+        clientSignedCert:
+          # path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem'
+          path: './networks/fabric/certs/cert.pem'
+    connectionProfile:
+      # path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml'
+      path: './networks/fabric/cpp.yaml'
+      discover: true
+
+# organizations:
+#   - mspid: hospital1MSP
+#     # Identities come from cryptogen created material for test-network
+#     identities:
+#       certificates:
+#       - name: 'hospital1-admin-default'
+#         admin: true
+#         clientSignedCert:
+#           pem: |
+#             -----BEGIN CERTIFICATE-----
+#             -----END CERTIFICATE-----
+
+#         clientPrivateKey:
+#           pem: |
+#             -----BEGIN PRIVATE KEY-----
+#             -----END PRIVATE KEY-----
+#     connectionProfile:
+#       # path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml'
+#       path: './networks/fabric/cpp.yaml'
+#       discover: true

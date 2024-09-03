@@ -1,0 +1,28 @@
+test:
+  workers:
+    type: remote
+    number: 5
+  rounds:
+    - label: Create a Patient.
+      # 5000 transactions should create around 1000 cars per worker but not guaranteed
+      # so need to set asset limits to less than 1000 for the other tests
+      txNumber: 100
+      rateControl:
+          type: fixed-load
+          opts:
+            transactionLoad: 5
+          # { type: "linear-rate", opts: {startingTps:20, finishingTps:30} }
+      workload:
+        module: benchmarks/samples/patient/fabcar/createPatient.js
+    - label: Query all patients.
+      txDuration: 30
+      rateControl:
+          type: fixed-load
+          opts:
+            transactionLoad: 5
+      workload:
+        module: benchmarks/samples/patient/fabcar/getPatients.js
+        arguments:
+          assets: 500
+          startKey: '1'
+          endKey: '50'
