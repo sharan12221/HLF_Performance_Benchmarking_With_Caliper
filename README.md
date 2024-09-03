@@ -2,16 +2,6 @@
 
 This repository contains sample benchmarks that may be used by Caliper, a blockchain performance benchmark framework. For more information on Caliper, please see the [Caliper main repository](https://github.com/hyperledger/caliper/)
 
-Associated performance reports, based on running these benchmarks, are published to the [repository github pages](https://hyperledger.github.io/caliper-benchmarks/).
-
-## Repository Branches
-
-This repository has three branches:
-
-1. **main**. Contains sample benchmarks
-2. **reports**. Contains md files that are built and published to the `gh-pages` branch
-3. **gh-pages**. Contains the build output from the `reports` branch 
-
 ## Main Branch Contents
 
 The benchmarks contained within the master branch are split into three directories:
@@ -40,3 +30,4 @@ For detailed information about using this repo with hyperledger besu see [Hyperl
 ## Extending the Documented Reports
 
 The documented reports are built automatically from the `reports` branch of this repository and subsequently hosted on the `gh-pages` branch; pull requests must be target the [`reports` branch](https://github.com/hyperledger/caliper-benchmarks/tree/reports) in order for any modifications to be built.
+
