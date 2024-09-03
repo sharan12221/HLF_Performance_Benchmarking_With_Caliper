@@ -1,11 +1,16 @@
 #!/bin/bash
+ 
+# cd ..
+# run this in test-network dir
 CHANNEL_NAME=${1:-mychannel}
 NEW_BATCH_TIMEOUT=${2:-"10s"}
 
-ORDERER_CA=${PWD}/../organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
-CORE_PEER_MSPCONFIGPATH=${PWD}/../organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export PATH=${PWD}/../bin:$PATH
+export FABRIC_CFG_PATH=$PWD/../config/
+ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
 CORE_PEER_ADDRESS=localhost:7051
-CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/../organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
+CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
 CORE_PEER_LOCALMSPID=Org1MSP
 set -x
 peer channel fetch config config_block.pb -o localhost:7050 -c $CHANNEL_NAME --tls --cafile $ORDERER_CA
@@ -33,8 +38,8 @@ configtxlator proto_encode --input header_in_envolope.json --type common.Envelop
 
 peer channel signconfigtx -f final_update_in_envelope.pb
 
-CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt
-CORE_PEER_MSPCONFIGPATH=${PWD}/../organizations/ordererOrganizations/example.com/users/Admin@example.com/msp
+CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt
+CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/ordererOrganizations/example.com/users/Admin@example.com/msp
 CORE_PEER_ADDRESS=localhost:7050
 CORE_PEER_LOCALMSPID=OrdererMSP
 
